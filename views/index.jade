@@ -1,0 +1,127 @@
+extends layout
+
+block pageStyle
+	script(type='text/javascript' src='/javascripts/forumControl.js')
+	link(rel='stylesheet', type='text/css', href='/stylesheets/sol.css')
+	link(rel='stylesheet', type='text/css', href='/stylesheets/pulsar.css')
+
+block content
+	-if (error || success || notice)
+		#report-area
+			h6 #{error}
+			h6 #{success}
+			h6 #{notice}
+
+	#title-area
+		#title-box
+			h1 #{titleMessage}
+
+	#project-area
+		#project-box
+			h2 OUR PROJECTS
+			h4 Over ambition and inexperience
+		.project-holder
+			.slide-box
+				-var i = stx_projects.length
+				script(type='text/javascript') $('.slide-box').css('width', #{i} * 340);
+				-for (var c = 0; c < i; c++)
+					-var project = stx_projects[c]
+					-var name = project.name;
+					-var desc = project.description;
+					-var imgPath = project.file_logo;
+					-var bgc = project.color_bgc;
+					-var link = project.link;
+					-if (bgc == 'default') bgc = 'fff'
+					a.project(href=link)
+						.outer-circle
+							.inner-circle(style='background-color:' + bgc)
+								img(src=imgPath alt='#{name}')
+						section.project-desc
+							h6.uline #{name}
+							p #{desc}
+			#slide-gradient
+			//- #slide-gradient-right
+				
+	-if (user && user.valid)
+		script(src='https://cdn.socket.io/socket.io-1.0.6.js')
+		script(type='text/javascript').
+			var socket = io.connect("http://82.37.178.154:8765");
+			var username = !{JSON.stringify(user.name)};
+			
+			if (username != '') {
+				console.log('Requesting Users');
+				socket.emit('currentUser', username);
+				var userUpdate = setInterval(function (){
+					console.log('Requesting Users');
+					socket.emit('currentUser', username);
+				}, 10000);
+			}
+			
+			socket.on("sendCurrentUsers", function (users){
+				console.log("Recieveing sduu");
+				controlTracker(users, username);
+			});
+			
+			socket.on('sendPosts', function (posts){
+				console.log("POSOSOTS")
+				displayPosts(posts);
+			});
+			
+			socket.on('viewPost', function (postObj){
+				viewPost(postObj);
+			});
+			
+			forumPosts('*');
+		#forum-preview
+			header
+				h3#title
+					a(href='/forum') FORUM
+			section#window
+				ul#f-controls
+					li#top-posts
+						i.fa.fa-line-chart
+					li#new-posts
+						i.fa.fa-calendar
+					li#user-posts
+						i.fa.fa-flag-o
+				#f-column
+					#post-creator
+						form.forum-input(action='/forum/new_post' method='post')
+							input#new-post-title(type="text" placeholder='Title' name='title')
+							label(for='new-post-format') Format:
+							input#new-post-text(type="radio" name='format' value='text')
+							label(for='new-post-text') Plain Text
+							input#new-post-html(type="radio" name='format' value='html')
+							label(for='new-post-html') HTML
+							textarea#new-post-content(name="postContent", cols="30", rows="10" placeholder='Your Post')
+							input(type="submit")
+					#post-holder
+					#post-viewer
+				ul#f-trending
+					li.tag.tag-right.tag-blue new post
+					li.tag.tag-right.tag-yellow activity
+					li.tag.tag-right.tag-yellow activity
+					li.tag.tag-right.tag-green friend liked
+					li.tag.tag-right.tag-blue new post
+					li.tag.tag-right.tag-red cool
+					li.tag.tag-right.tag-green friend liked
+				h3.tag.tag-left#f-new-post +
+			section.online-users
+				div#currentUser
+					img(src='#{user.avatar}'  alt='#{user.name}')
+					a(href='/user/#{user.name}/profile') #{user.name}
+	#team-area
+		header#team-header
+			.team-wrap-side
+			img(src='./images/ourTeam.png')
+			.team-wrap-side
+		section#team-box
+			.members
+				.member
+					img(src='./images/mem1.png', alt='')
+				.member
+					img(src='./images/mem2.png', alt='')
+				.member
+					img(src='./images/mem3.png', alt='')
+
+	script(type='text/javascript' src='/javascripts/formatting.js')

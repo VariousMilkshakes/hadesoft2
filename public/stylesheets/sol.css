@@ -1,0 +1,167 @@
+/* CSS styling for home page /index */
+/* Global */
+/* Page Sections */
+#title-area {
+  height: 730px;
+  box-shadow: inset 0 4px 0px 0px rgba(0,0,0,0.4);
+  -webkit-box-shadow: inset 0 4px 0px 0px rgba(0,0,0,0.4);
+  -moz-box-shadow: inset 0 4px 0px 0px rgba(0,0,0,0.4);
+  text-shadow: 0px 4px 0px rgba(0,0,0,0.4);
+  -webkit-text-shadow: 0px 4px 0px rgba(0,0,0,0.4);
+  -moz-text-shadow: 0px 4px 0px rgba(0,0,0,0.4);
+  width: 100%;
+}
+#title-box {
+  margin: 0 auto;
+  width: 940px;
+}
+#title-box h1 {
+  color: #fff;
+  display: inline-block;
+  height: 120px;
+  margin: 270px auto 0 auto;
+  text-align: center;
+  vertical-align: middle;
+  width: 930px;
+}
+#project-area {
+  background-color: #fff;
+  height: 1050px;
+  width: 100%;
+}
+#project-box {
+  margin: 0 auto;
+  padding-top: 120px;
+  text-align: center;
+  width: 940px;
+}
+#project-box h2 {
+  margin: 0;
+  font-family: 'Source Sans Pro';
+}
+#project-box h4 {
+  margin-top: 20px;
+}
+.project-holder {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  height: 500px;
+  width: 100%;
+  position: relative;
+}
+.slide-box {
+  display: inline-block;
+  height: 500px;
+  position: absolute;
+}
+#slide-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 500px;
+  width: 100%;
+  pointer-events: none;
+}
+.project {
+  display: inline-block;
+  margin: 0 20px 30px 20px;
+  text-align: center;
+  height: 400px;
+  width: 300px;
+  float: left;
+}
+.outer-circle {
+  background-color: #e3e3e3;
+  border-radius: 105px;
+  height: 195px;
+  margin: 0 auto;
+  padding-top: 15px;
+  text-align: center;
+  -webkit-transition: background-color 1s;
+  transition: background-color 1s;
+  width: 210px;
+}
+.inner-circle {
+  background-color: #fff;
+  border-radius: 90px;
+  height: 180px;
+  margin-left: 15px;
+  text-align: center;
+  width: 180px;
+}
+.inner-circle img {
+  margin-top: 30px;
+  max-width: 120px;
+  z-index: 20;
+}
+.project:nth-child(4n):hover .outer-circle,
+.project:nth-child(4n):hover .uline::after {
+  background-color: #ffa060;
+}
+.project:nth-child(4n+1):hover .outer-circle,
+.project:nth-child(4n+1):hover .uline::after {
+  background-color: #4eb666;
+}
+.project:nth-child(4n+2):hover .outer-circle,
+.project:nth-child(4n+2):hover .uline::after {
+  background-color: #e2544f;
+}
+.project:nth-child(4n+3):hover .outer-circle,
+.project:nth-child(4n+3):hover .uline::after {
+  background-color: #7fc9ff;
+}
+.project-desc {
+  width: 210px;
+  margin: 20px auto 0 auto;
+}
+.project-desc h6 {
+  display: inline-block;
+}
+.project-desc p {
+  font-size: 0.8em;
+}
+.uline::after {
+  background-color: #e3e3e3;
+  bottom: -5px;
+  content: '';
+  display: block;
+  height: 3px;
+  left: 10%;
+  margin: 0;
+  position: relative;
+  width: 80%;
+  -webkit-transition: background-color 1s;
+  transition: background-color 1s;
+}
+#team-area {
+  height: 620px;
+}
+#team-box {
+  background-color: #993a2d;
+  display: flex;
+  height: 100%;
+  margin: 0 auto;
+}
+#team-header {
+  margin: 0 auto;
+  display: flex;
+}
+#team-header img {
+  background-color: transparent;
+  height: 78px;
+  flex-basis: 300px;
+}
+.team-wrap-side {
+  background-color: #993a2d;
+  flex-grow: 4;
+}
+.members {
+  width: 940px;
+  margin: 80px auto 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.member {
+  flex-grow: 1;
+  text-align: center;
+}
